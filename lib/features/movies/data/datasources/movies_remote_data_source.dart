@@ -7,6 +7,7 @@ import '../models/movie_model.dart';
 abstract class MoviesRemoteDataSource {
   Future<List<MovieModel>> getTrendingMovies();
   Future<List<MovieModel>> getNowPlayingMovies();
+  Future<List<MovieModel>> searchMovies(String query);
 }
 
 class MoviesRemoteDataSourceImpl implements MoviesRemoteDataSource {
@@ -30,6 +31,18 @@ class MoviesRemoteDataSourceImpl implements MoviesRemoteDataSource {
   Future<List<MovieModel>> getNowPlayingMovies() async {
     try {
       final response = await apiService.getNowPlayingMovies();
+      return response.results;
+    } on DioException catch (e) {
+      throw ServerException(e.message ?? 'Unknown Server Error');
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<List<MovieModel>> searchMovies(String query) async {
+    try {
+      final response = await apiService.searchMovies(query);
       return response.results;
     } on DioException catch (e) {
       throw ServerException(e.message ?? 'Unknown Server Error');

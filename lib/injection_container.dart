@@ -13,7 +13,9 @@ import 'features/movies/data/repositories/movies_repository_impl.dart';
 import 'features/movies/domain/repositories/movies_repository.dart';
 import 'features/movies/domain/usecases/get_now_playing_movies.dart';
 import 'features/movies/domain/usecases/get_trending_movies.dart';
+import 'features/movies/domain/usecases/search_movies.dart';
 import 'features/movies/presentation/bloc/movies_bloc.dart';
+import 'features/movies/presentation/bloc/search_movies/search_movies_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -23,10 +25,12 @@ Future<void> init() async {
   sl.registerFactory(
     () => MoviesBloc(getTrendingMovies: sl(), getNowPlayingMovies: sl()),
   );
+  sl.registerFactory(() => SearchMoviesBloc(searchMovies: sl()));
 
   // Use cases
   sl.registerLazySingleton(() => GetTrendingMovies(sl()));
   sl.registerLazySingleton(() => GetNowPlayingMovies(sl()));
+  sl.registerLazySingleton(() => SearchMovies(sl()));
 
   // Repository
   sl.registerLazySingleton<MoviesRepository>(
@@ -36,9 +40,6 @@ Future<void> init() async {
   // Data sources
   sl.registerLazySingleton<MoviesRemoteDataSource>(
     () => MoviesRemoteDataSourceImpl(sl()),
-  );
-  sl.registerLazySingleton<MovieDetailsRemoteDataSource>(
-    () => MovieDetailsRemoteDataSourceImpl(sl()),
   );
 
   // Features - Movie Details

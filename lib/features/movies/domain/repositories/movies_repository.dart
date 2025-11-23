@@ -11,4 +11,8 @@ abstract class MoviesRepository {
   /// Fetches a list of movies that are currently playing in theaters.
   /// Returns a [Result] containing a list of [Movie] entities.
   Future<Result<List<Movie>>> getNowPlayingMovies();
+
+  /// Searches for movies based on a query string.
+  /// Returns a [Result] containing a list of [Movie] entities.
+  Future<Result<List<Movie>>> searchMovies(String query);
 }

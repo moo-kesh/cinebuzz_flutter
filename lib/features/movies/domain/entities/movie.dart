@@ -5,9 +5,9 @@ class Movie extends Equatable {
   final String title;
   final String originalTitle;
   final String overview;
-  final String posterPath;
-  final String backdropPath;
-  final String releaseDate;
+  final String? posterPath;
+  final String? backdropPath;
+  final String? releaseDate;
   final double voteAverage;
   final int voteCount;
   final double popularity;
@@ -21,10 +21,6 @@ class Movie extends Equatable {
     required this.id,
     required this.title,
     required this.originalTitle,
-    required this.overview,
-    required this.posterPath,
-    required this.backdropPath,
-    required this.releaseDate,
     required this.voteAverage,
     required this.voteCount,
     required this.popularity,
@@ -32,7 +28,11 @@ class Movie extends Equatable {
     required this.genreIds,
     required this.originalLanguage,
     required this.video,
-    this.mediaType,
+    required this.mediaType,
+    required this.overview,
+    this.posterPath,
+    this.backdropPath,
+    this.releaseDate,
   });
 
   @override

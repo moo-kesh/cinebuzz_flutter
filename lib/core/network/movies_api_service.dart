@@ -15,6 +15,9 @@ abstract class MoviesApiService {
   @GET('movie/now_playing')
   Future<MoviesResponseModel> getNowPlayingMovies();
 
+  @GET('search/movie')
+  Future<MoviesResponseModel> searchMovies(@Query('query') String query);
+
   @GET('/movie/{movie_id}')
   Future<MovieDetailsModel> getMovieDetails(@Path('movie_id') int movieId);
 }

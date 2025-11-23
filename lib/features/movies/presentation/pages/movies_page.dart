@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../injection_container.dart';
 import '../bloc/movies_bloc.dart';
+import 'search_movies_page.dart';
 
 class MoviesPage extends StatelessWidget {
   const MoviesPage({super.key});
@@ -22,7 +23,12 @@ class MoviesPage extends StatelessWidget {
             IconButton(
               icon: const Icon(Icons.search),
               onPressed: () {
-                // TODO: Navigate to search
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SearchMoviesPage(),
+                  ),
+                );
               },
             ),
           ],
