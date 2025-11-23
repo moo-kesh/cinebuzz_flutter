@@ -1,3 +1,4 @@
+import 'package:cinebuzz_flutter/features/movie_details/data/models/movie_details_model.dart';
 import 'package:cinebuzz_flutter/features/movies/data/models/movies_response_model.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
@@ -13,4 +14,7 @@ abstract class MoviesApiService {
 
   @GET('movie/now_playing')
   Future<MoviesResponseModel> getNowPlayingMovies();
+
+  @GET('/movie/{movie_id}')
+  Future<MovieDetailsModel> getMovieDetails(@Path('movie_id') int movieId);
 }

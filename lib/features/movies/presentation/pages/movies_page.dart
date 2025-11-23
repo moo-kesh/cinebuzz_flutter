@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cinebuzz_flutter/features/movie_details/presentation/pages/movie_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -53,37 +54,48 @@ class MoviesPage extends StatelessWidget {
                         itemCount: state.trendingMovies.length,
                         itemBuilder: (context, index) {
                           final movie = state.trendingMovies[index];
-                          return Container(
-                            width: 140,
-                            margin: const EdgeInsets.symmetric(horizontal: 8),
-                            child: Column(
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                    color: Colors.grey[300],
-                                    child: movie.posterPath.isNotEmpty
-                                        ? CachedNetworkImage(
-                                            imageUrl:
-                                                'https://image.tmdb.org/t/p/w500${movie.posterPath}',
-                                            fit: BoxFit.cover,
-                                            placeholder: (context, url) =>
-                                                const Center(
-                                                  child:
-                                                      CircularProgressIndicator(),
-                                                ),
-                                            errorWidget:
-                                                (context, url, error) =>
-                                                    const Icon(Icons.error),
-                                          )
-                                        : const Icon(Icons.movie),
+                          return InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      MovieDetailsPage(movieId: movie.id),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              width: 140,
+                              margin: const EdgeInsets.symmetric(horizontal: 8),
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                    child: Container(
+                                      color: Colors.grey[300],
+                                      child: movie.posterPath.isNotEmpty
+                                          ? CachedNetworkImage(
+                                              imageUrl:
+                                                  'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                                              fit: BoxFit.cover,
+                                              placeholder: (context, url) =>
+                                                  const Center(
+                                                    child:
+                                                        CircularProgressIndicator(),
+                                                  ),
+                                              errorWidget:
+                                                  (context, url, error) =>
+                                                      const Icon(Icons.error),
+                                            )
+                                          : const Icon(Icons.movie),
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  movie.title,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ],
+                                  Text(
+                                    movie.title,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ],
+                              ),
                             ),
                           );
                         },

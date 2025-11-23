@@ -3,6 +3,11 @@ import 'package:get_it/get_it.dart';
 
 import 'core/network/api_interceptor.dart';
 import 'core/network/movies_api_service.dart';
+import 'features/movie_details/data/datasources/movie_details_remote_data_source.dart';
+import 'features/movie_details/data/repositories/movie_details_repository_impl.dart';
+import 'features/movie_details/domain/repositories/movie_details_repository.dart';
+import 'features/movie_details/domain/usecases/get_movie_details.dart';
+import 'features/movie_details/presentation/bloc/bloc/movie_details_bloc.dart';
 import 'features/movies/data/datasources/movies_remote_data_source.dart';
 import 'features/movies/data/repositories/movies_repository_impl.dart';
 import 'features/movies/domain/repositories/movies_repository.dart';
@@ -31,6 +36,26 @@ Future<void> init() async {
   // Data sources
   sl.registerLazySingleton<MoviesRemoteDataSource>(
     () => MoviesRemoteDataSourceImpl(sl()),
+  );
+  sl.registerLazySingleton<MovieDetailsRemoteDataSource>(
+    () => MovieDetailsRemoteDataSourceImpl(sl()),
+  );
+
+  // Features - Movie Details
+  // BLoC
+  sl.registerFactory(() => MovieDetailsBloc(getMovieDetails: sl()));
+
+  // Use cases
+  sl.registerLazySingleton(() => GetMovieDetails(sl()));
+
+  // Repository
+  sl.registerLazySingleton<MovieDetailsRepository>(
+    () => MovieDetailsRepositoryImpl(remoteDataSource: sl()),
+  );
+
+  // Data sources
+  sl.registerLazySingleton<MovieDetailsRemoteDataSource>(
+    () => MovieDetailsRemoteDataSourceImpl(sl()),
   );
 
   sl.registerLazySingleton<MoviesApiService>(() => MoviesApiService(sl()));
