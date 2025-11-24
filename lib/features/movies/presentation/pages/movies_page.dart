@@ -1,12 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../injection_container.dart';
-import '../../../bookmark/presentation/pages/watchlist_page.dart';
-import '../../../movie_details/presentation/pages/movie_details_page.dart';
 import '../bloc/movies_bloc.dart';
-import 'search_movies_page.dart';
 
 class MoviesPage extends StatelessWidget {
   const MoviesPage({super.key});
@@ -24,23 +22,13 @@ class MoviesPage extends StatelessWidget {
             IconButton(
               icon: const Icon(Icons.search),
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SearchMoviesPage(),
-                  ),
-                );
+                context.push('/search');
               },
             ),
             IconButton(
               icon: const Icon(Icons.bookmark),
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const WatchlistPage(),
-                  ),
-                );
+                context.push('/watchlist');
               },
             ),
           ],
@@ -74,13 +62,7 @@ class MoviesPage extends StatelessWidget {
                           final movie = state.trendingMovies[index];
                           return InkWell(
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      MovieDetailsPage(movieId: movie.id),
-                                ),
-                              );
+                              context.push('/movie/${movie.id}');
                             },
                             child: Container(
                               width: 140,
@@ -153,6 +135,9 @@ class MoviesPage extends StatelessWidget {
                           ),
                           title: Text(movie.title),
                           subtitle: Text(movie.releaseDate ?? 'Unknown'),
+                          onTap: () {
+                            context.push('/movie/${movie.id}');
+                          },
                         );
                       },
                     ),

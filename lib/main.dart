@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'features/movies/presentation/pages/movies_page.dart';
+import 'core/routes/app_router.dart';
 import 'injection_container.dart' as di;
 
 void main() async {
@@ -13,12 +13,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'CineBuzz Flutter',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const MoviesPage(),
+      routerConfig: appRouter,
     );
   }
 }

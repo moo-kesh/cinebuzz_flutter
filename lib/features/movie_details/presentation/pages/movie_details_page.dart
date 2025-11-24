@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../../injection_container.dart';
 import '../../../bookmark/presentation/bloc/bookmark/bookmark_cubit.dart';
@@ -18,6 +19,16 @@ class MovieDetailsPage extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Movie Details'),
           actions: [
+            IconButton(
+              icon: const Icon(Icons.share),
+              onPressed: () {
+                final params = ShareParams(
+                  uri: Uri.parse('https://cinebuzz.link/movie/$movieId'),
+                  title: 'Check out this movie!',
+                );
+                SharePlus.instance.share(params);
+              },
+            ),
             BlocProvider(
               create: (context) => sl<BookmarkCubit>(),
               child: BlocBuilder<BookmarkCubit, BookmarkState>(
