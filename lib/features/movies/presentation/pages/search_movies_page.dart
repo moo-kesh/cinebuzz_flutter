@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/utils/tmdb_image_utils.dart';
 import '../../../../injection_container.dart';
 import '../../../movie_details/presentation/pages/movie_details_page.dart';
 import '../bloc/search_movies/search_movies_bloc.dart';
@@ -67,8 +68,9 @@ class SearchMoviesPage extends StatelessWidget {
                             width: 50,
                             child: movie.posterPath != null
                                 ? CachedNetworkImage(
-                                    imageUrl:
-                                        'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                                    imageUrl: TmdbImageUtils.buildPosterUrl(
+                                      movie.posterPath!,
+                                    ),
                                     fit: BoxFit.cover,
                                     placeholder: (context, url) => const Center(
                                       child: CircularProgressIndicator(),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/utils/tmdb_image_utils.dart';
 import '../../../../injection_container.dart';
 import '../bloc/movies_bloc.dart';
 
@@ -75,7 +76,11 @@ class MoviesPage extends StatelessWidget {
                                       child: movie.posterPath != null
                                           ? CachedNetworkImage(
                                               imageUrl:
-                                                  'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                                                  TmdbImageUtils.buildPosterUrl(
+                                                    movie.posterPath!,
+                                                    size:
+                                                        TmdbPosterImageSize.w92,
+                                                  ),
                                               fit: BoxFit.cover,
                                               placeholder: (context, url) =>
                                                   const Center(
@@ -122,8 +127,10 @@ class MoviesPage extends StatelessWidget {
                             width: 50,
                             child: movie.posterPath != null
                                 ? CachedNetworkImage(
-                                    imageUrl:
-                                        'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                                    imageUrl: TmdbImageUtils.buildPosterUrl(
+                                      movie.posterPath!,
+                                      size: TmdbPosterImageSize.w92,
+                                    ),
                                     fit: BoxFit.cover,
                                     placeholder: (context, url) => const Center(
                                       child: CircularProgressIndicator(),
