@@ -28,9 +28,8 @@ class BookmarkCubit extends Cubit<BookmarkState> {
 
   Future<void> toggle(MovieDetails details) async {
     final currentState = state;
-    if (currentState.isBookmarked) {
-      emit(BookmarkState(isBookmarked: !currentState.isBookmarked));
-    }
+    // Optimistically toggle the bookmark state
+    emit(currentState.copyWith(isBookmarked: !currentState.isBookmarked));
 
     final movie = Movie(
       id: details.id,
