@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../../core/usecases/usecase.dart';
+import '../../domain/entities/movie.dart';
 import '../../domain/usecases/get_now_playing_movies.dart';
 import '../../domain/usecases/get_trending_movies.dart';
 

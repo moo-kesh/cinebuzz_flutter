@@ -1,7 +1,8 @@
-import 'package:cinebuzz_flutter/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../injection_container.dart';
+import '../../../bookmark/presentation/bloc/bookmark/bookmark_cubit.dart';
 import '../bloc/bloc/movie_details_bloc.dart';
 
 class MovieDetailsPage extends StatelessWidget {
@@ -12,10 +13,37 @@ class MovieDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          sl<MovieDetailsBloc>()
-            ..add(GetMovieDetailsEvent(movieId)), // Example movieId
+          sl<MovieDetailsBloc>()..add(GetMovieDetailsEvent(movieId)),
       child: Scaffold(
-        appBar: AppBar(title: const Text('Movie Details')),
+        appBar: AppBar(
+          title: const Text('Movie Details'),
+          actions: [
+            BlocProvider(
+              create: (context) => sl<BookmarkCubit>(),
+              child: BlocBuilder<BookmarkCubit, BookmarkState>(
+                builder: (context, state) {
+                  return IconButton(
+                    icon: Icon(
+                      state.isBookmarked
+                          ? Icons.bookmark
+                          : Icons.bookmark_border,
+                    ),
+                    onPressed: () {
+                      final movieDetailsState = context
+                          .read<MovieDetailsBloc>()
+                          .state;
+                      if (movieDetailsState.movieDetails != null) {
+                        context.read<BookmarkCubit>().toggle(
+                          context.read<MovieDetailsBloc>().state.movieDetails!,
+                        );
+                      }
+                    },
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
         body: BlocBuilder<MovieDetailsBloc, MovieDetailsState>(
           builder: (context, state) {
             return switch (state.status) {

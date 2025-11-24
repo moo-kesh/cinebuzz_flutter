@@ -4,6 +4,14 @@ import 'package:hive_ce_flutter/hive_flutter.dart';
 
 import 'core/network/api_interceptor.dart';
 import 'core/network/movies_api_service.dart';
+import 'features/bookmark/data/datasources/bookmark_local_data_source.dart';
+import 'features/bookmark/data/repositories/bookmark_repository_impl.dart';
+import 'features/bookmark/domain/repositories/bookmark_repository.dart';
+import 'features/bookmark/domain/usecases/get_bookmarked_movies.dart';
+import 'features/bookmark/domain/usecases/is_bookmarked.dart';
+import 'features/bookmark/domain/usecases/toggle_bookmark.dart';
+import 'features/bookmark/presentation/bloc/bookmark/bookmark_cubit.dart';
+import 'features/bookmark/presentation/bloc/watchlist/watchlist_bloc.dart';
 import 'features/movie_details/data/datasources/movie_details_remote_data_source.dart';
 import 'features/movie_details/data/repositories/movie_details_repository_impl.dart';
 import 'features/movie_details/domain/repositories/movie_details_repository.dart';
@@ -69,6 +77,28 @@ Future<void> init() async {
   );
 
   sl.registerLazySingleton<MoviesApiService>(() => MoviesApiService(sl()));
+
+  // Features - Bookmark
+  // Bloc
+  sl.registerFactory(() => WatchlistBloc(getBookmarkedMovies: sl()));
+  sl.registerFactory(
+    () => BookmarkCubit(isBookmarked: sl(), toggleBookmark: sl()),
+  );
+
+  // Use cases
+  sl.registerLazySingleton(() => GetBookmarkedMovies(sl()));
+  sl.registerLazySingleton(() => ToggleBookmark(sl()));
+  sl.registerLazySingleton(() => IsBookmarked(sl()));
+
+  // Repository
+  sl.registerLazySingleton<BookmarkRepository>(
+    () => BookmarkRepositoryImpl(localDataSource: sl()),
+  );
+
+  // Data sources
+  sl.registerLazySingleton<BookmarkLocalDataSource>(
+    () => BookmarkLocalDataSourceImpl(movieBox: sl(), movieListsBox: sl()),
+  );
 
   // Core
   sl.registerLazySingleton<Dio>(() {

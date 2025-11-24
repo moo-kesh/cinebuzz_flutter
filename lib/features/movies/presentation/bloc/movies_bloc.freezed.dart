@@ -244,7 +244,7 @@ String toString() {
 /// @nodoc
 mixin _$MoviesState {
 
- MoviesStatus get status; List get nowPlayingMovies; List get trendingMovies; String? get errorMessage;
+ MoviesStatus get status; List<Movie> get nowPlayingMovies; List<Movie> get trendingMovies; String? get errorMessage;
 /// Create a copy of MoviesState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -275,7 +275,7 @@ abstract mixin class $MoviesStateCopyWith<$Res>  {
   factory $MoviesStateCopyWith(MoviesState value, $Res Function(MoviesState) _then) = _$MoviesStateCopyWithImpl;
 @useResult
 $Res call({
- MoviesStatus status, List nowPlayingMovies, List trendingMovies, String? errorMessage
+ MoviesStatus status, List<Movie> nowPlayingMovies, List<Movie> trendingMovies, String? errorMessage
 });
 
 
@@ -296,8 +296,8 @@ class _$MoviesStateCopyWithImpl<$Res>
   return _then(_self.copyWith(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as MoviesStatus,nowPlayingMovies: null == nowPlayingMovies ? _self.nowPlayingMovies : nowPlayingMovies // ignore: cast_nullable_to_non_nullable
-as List,trendingMovies: null == trendingMovies ? _self.trendingMovies : trendingMovies // ignore: cast_nullable_to_non_nullable
-as List,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as List<Movie>,trendingMovies: null == trendingMovies ? _self.trendingMovies : trendingMovies // ignore: cast_nullable_to_non_nullable
+as List<Movie>,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -383,7 +383,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( MoviesStatus status,  List nowPlayingMovies,  List trendingMovies,  String? errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( MoviesStatus status,  List<Movie> nowPlayingMovies,  List<Movie> trendingMovies,  String? errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _MoviesState() when $default != null:
 return $default(_that.status,_that.nowPlayingMovies,_that.trendingMovies,_that.errorMessage);case _:
@@ -404,7 +404,7 @@ return $default(_that.status,_that.nowPlayingMovies,_that.trendingMovies,_that.e
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( MoviesStatus status,  List nowPlayingMovies,  List trendingMovies,  String? errorMessage)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( MoviesStatus status,  List<Movie> nowPlayingMovies,  List<Movie> trendingMovies,  String? errorMessage)  $default,) {final _that = this;
 switch (_that) {
 case _MoviesState():
 return $default(_that.status,_that.nowPlayingMovies,_that.trendingMovies,_that.errorMessage);case _:
@@ -424,7 +424,7 @@ return $default(_that.status,_that.nowPlayingMovies,_that.trendingMovies,_that.e
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( MoviesStatus status,  List nowPlayingMovies,  List trendingMovies,  String? errorMessage)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( MoviesStatus status,  List<Movie> nowPlayingMovies,  List<Movie> trendingMovies,  String? errorMessage)?  $default,) {final _that = this;
 switch (_that) {
 case _MoviesState() when $default != null:
 return $default(_that.status,_that.nowPlayingMovies,_that.trendingMovies,_that.errorMessage);case _:
@@ -439,19 +439,19 @@ return $default(_that.status,_that.nowPlayingMovies,_that.trendingMovies,_that.e
 
 
 class _MoviesState implements MoviesState {
-  const _MoviesState({this.status = MoviesStatus.initial, final  List nowPlayingMovies = const [], final  List trendingMovies = const [], this.errorMessage}): _nowPlayingMovies = nowPlayingMovies,_trendingMovies = trendingMovies;
+  const _MoviesState({this.status = MoviesStatus.initial, final  List<Movie> nowPlayingMovies = const [], final  List<Movie> trendingMovies = const [], this.errorMessage}): _nowPlayingMovies = nowPlayingMovies,_trendingMovies = trendingMovies;
   
 
 @override@JsonKey() final  MoviesStatus status;
- final  List _nowPlayingMovies;
-@override@JsonKey() List get nowPlayingMovies {
+ final  List<Movie> _nowPlayingMovies;
+@override@JsonKey() List<Movie> get nowPlayingMovies {
   if (_nowPlayingMovies is EqualUnmodifiableListView) return _nowPlayingMovies;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_nowPlayingMovies);
 }
 
- final  List _trendingMovies;
-@override@JsonKey() List get trendingMovies {
+ final  List<Movie> _trendingMovies;
+@override@JsonKey() List<Movie> get trendingMovies {
   if (_trendingMovies is EqualUnmodifiableListView) return _trendingMovies;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_trendingMovies);
@@ -489,7 +489,7 @@ abstract mixin class _$MoviesStateCopyWith<$Res> implements $MoviesStateCopyWith
   factory _$MoviesStateCopyWith(_MoviesState value, $Res Function(_MoviesState) _then) = __$MoviesStateCopyWithImpl;
 @override @useResult
 $Res call({
- MoviesStatus status, List nowPlayingMovies, List trendingMovies, String? errorMessage
+ MoviesStatus status, List<Movie> nowPlayingMovies, List<Movie> trendingMovies, String? errorMessage
 });
 
 
@@ -510,8 +510,8 @@ class __$MoviesStateCopyWithImpl<$Res>
   return _then(_MoviesState(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as MoviesStatus,nowPlayingMovies: null == nowPlayingMovies ? _self._nowPlayingMovies : nowPlayingMovies // ignore: cast_nullable_to_non_nullable
-as List,trendingMovies: null == trendingMovies ? _self._trendingMovies : trendingMovies // ignore: cast_nullable_to_non_nullable
-as List,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as List<Movie>,trendingMovies: null == trendingMovies ? _self._trendingMovies : trendingMovies // ignore: cast_nullable_to_non_nullable
+as List<Movie>,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

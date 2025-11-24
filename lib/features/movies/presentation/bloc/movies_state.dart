@@ -6,8 +6,8 @@ enum MoviesStatus { initial, loading, loaded, error }
 abstract class MoviesState with _$MoviesState {
   const factory MoviesState({
     @Default(MoviesStatus.initial) MoviesStatus status,
-    @Default([]) List nowPlayingMovies,
-    @Default([]) List trendingMovies,
+    @Default([]) List<Movie> nowPlayingMovies,
+    @Default([]) List<Movie> trendingMovies,
     String? errorMessage,
   }) = _MoviesState;
 }

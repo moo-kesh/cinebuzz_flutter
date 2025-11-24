@@ -1,9 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cinebuzz_flutter/features/movie_details/presentation/pages/movie_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../injection_container.dart';
+import '../../../bookmark/presentation/pages/watchlist_page.dart';
+import '../../../movie_details/presentation/pages/movie_details_page.dart';
 import '../bloc/movies_bloc.dart';
 import 'search_movies_page.dart';
 
@@ -27,6 +28,17 @@ class MoviesPage extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => const SearchMoviesPage(),
+                  ),
+                );
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.bookmark),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const WatchlistPage(),
                   ),
                 );
               },
@@ -78,7 +90,7 @@ class MoviesPage extends StatelessWidget {
                                   Expanded(
                                     child: Container(
                                       color: Colors.grey[300],
-                                      child: movie.posterPath.isNotEmpty
+                                      child: movie.posterPath != null
                                           ? CachedNetworkImage(
                                               imageUrl:
                                                   'https://image.tmdb.org/t/p/w500${movie.posterPath}',
@@ -126,7 +138,7 @@ class MoviesPage extends StatelessWidget {
                         return ListTile(
                           leading: SizedBox(
                             width: 50,
-                            child: movie.posterPath.isNotEmpty
+                            child: movie.posterPath != null
                                 ? CachedNetworkImage(
                                     imageUrl:
                                         'https://image.tmdb.org/t/p/w500${movie.posterPath}',
@@ -140,7 +152,7 @@ class MoviesPage extends StatelessWidget {
                                 : const Icon(Icons.movie),
                           ),
                           title: Text(movie.title),
-                          subtitle: Text(movie.releaseDate),
+                          subtitle: Text(movie.releaseDate ?? 'Unknown'),
                         );
                       },
                     ),

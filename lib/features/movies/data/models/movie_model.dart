@@ -89,4 +89,24 @@ class MovieModel {
       mediaType: mediaType,
     );
   }
+
+  factory MovieModel.fromEntity(Movie movie) {
+    return MovieModel(
+      id: movie.id,
+      title: movie.title,
+      originalTitle: movie.originalTitle,
+      overview: movie.overview,
+      posterPath: movie.posterPath,
+      backdropPath: movie.backdropPath,
+      releaseDate: movie.releaseDate,
+      voteAverage: movie.voteAverage,
+      voteCount: movie.voteCount,
+      popularity: movie.popularity,
+      adult: movie.adult,
+      genreIds: movie.genreIds,
+      originalLanguage: movie.originalLanguage,
+      video: movie.video,
+      mediaType: movie.mediaType,
+    );
+  }
 }
