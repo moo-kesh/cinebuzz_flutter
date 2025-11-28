@@ -12,6 +12,16 @@ Cinebuzz Flutter is a movie discovery application built with **Clean Architectur
 - **Bookmarks**: Save your favorite movies locally (using Hive).
 - **Movie Details**: View detailed information about a movie.
 
+## Screenshots
+
+| Home                          | Movie Details                                   | Share Movie                                 |
+|-------------------------------|-------------------------------------------------|---------------------------------------------|
+| ![Home](screenshots/home.png) | ![Movie Details](screenshots/movie_details.png) | ![Share Movie](screenshots/share_movie.png) |
+
+| Bookmarks                               | Search                            |
+|-----------------------------------------|-----------------------------------|
+| ![Bookmarks](screenshots/bookmarks.png) | ![Search](screenshots/search.png) |
+
 ## Tech Stack
 
 - **Framework**: Flutter
